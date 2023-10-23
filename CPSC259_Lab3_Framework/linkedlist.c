@@ -31,7 +31,8 @@
   */
 node* create_linked_list()
 {
-  // Insert your code here
+    node* empty = NULL;
+    return empty;
 
 }
 
@@ -48,10 +49,11 @@ node* create_linked_list()
  */
 node* create_node(airplane plane)
 {
-  // Insert your code here
+    node* name = (node*)malloc(sizeof(node));
+    name->plane = plane;
+    name->next = NULL;
 
-  // replace this line with something appropriate
-  return NULL;
+  return name;
 }
 
 /*
