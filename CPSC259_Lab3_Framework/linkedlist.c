@@ -2,10 +2,10 @@
  File:         linkedlist.c
  Purpose:      Implements the linked list functions whose prototypes
                are declared in the linked_list.h header file
- Author:       Your names
- Student #s:   12345678 and 12345678
- CWLs:         cwl1 and cwl2
- Date:         Add the date here
+ Author:       Maya Taylor Quinn Senych
+ Student #s:   18489633 and 12345678
+ CWLs:         mtaylo11 and qsenych
+ Date:         October 23, 2023
  */
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -69,10 +69,8 @@ node* create_node(airplane plane)
  */
 node* prepend_node(node* list, node* new_node)
 {
-  // Insert your code here
-
-  // replace this line with something appropriate
-  return NULL;
+    new_node->next = list;
+    return(new_node);
 }
 
 /*
