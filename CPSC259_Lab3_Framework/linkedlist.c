@@ -87,8 +87,15 @@ node* prepend_node(node* list, node* new_node)
  */
 node* delete_node(node* list)
 {
-
-  return NULL;
+    if (list != NULL) {
+        node* temp;
+        temp = list->next;
+        list = temp;
+        return list;
+    }
+    else {
+        return NULL;
+    }
 }
 
 /*
@@ -100,10 +107,14 @@ node* delete_node(node* list)
  */
 int get_length(node* list)
 {
-  // Insert your code here
-
-  // replace this line with something appropriate
-  return -1;
+    int count = 0;
+    node* temp = list;
+    while (list != NULL) {
+        list = list-> next;
+        count++;
+  }
+    list = temp;
+  return count;
 }
 
 /*
@@ -116,7 +127,13 @@ int get_length(node* list)
  */
 node* delete_list(node* list)
 {
-    //
+    node* temp;
+    while (list != NULL) {
+        temp = list;
+        list = list->next;
+        delete_node(temp);
+    }
+    list = NULL;
   return list;
 }
 
@@ -134,7 +151,32 @@ node* delete_list(node* list)
  */
 void print_node(node* node_to_print)
 {
-  // Insert your code here
+    if(node_to_print != NULL) {
+        
+        printf("flight_number: %d\n", node_to_print->plane.flight_number);
+        if(node_to_print->plane.city_origin != NULL) {
+            printf("Link points to address %x\n", node_to_print->plane.city_origin);
+            //printf("city_origin: %s\n", node_to_print->plane.city_origin);
+        }
+        else {
+            printf("Link = NULL\n");
+        }
+        if (node_to_print->plane.city_destination != NULL) {
+            printf("Link points to address %x\n", node_to_print->plane.city_destination);
+            //printf("city_origin: %s\n", node_to_print->plane.city_origin);
+        }
+        else {
+            printf("Link = NULL\n");
+        }
+        
+        printf("priority: %d\n", node_to_print->plane.priority);
+        printf("maxmimum_speed_kph: %d\n", node_to_print->plane.maximum_speed_kph);
+        printf("cruising_altitude: %d\n", node_to_print->plane.cruising_altitude);
+        printf("capacity: %d\n", node_to_print->plane.capacity);
+    }
+    else {
+        printf("The node is empty\n");
+    }
 
 }
 
@@ -151,7 +193,13 @@ void print_node(node* node_to_print)
  */
 void print_list(node* list_to_print)
 {
-  // Insert your code here
+    node* temp = list_to_print;
+    while (list_to_print != NULL) {
+        print_node(list_to_print);
+        list_to_print = list_to_print->next;
+        
+    }
+    list_to_print = temp;
 
 }
 
@@ -167,6 +215,12 @@ void print_list(node* list_to_print)
 node* reverse(node* list)
 {
   // Insert your code here
+
+    // temp 
+
+
+
+
 
   // replace this line with something appropriate
   return NULL;
@@ -188,6 +242,12 @@ node* remove_from_list(node* list, char* destination_city)
 {
   // Insert your code here
 
+
+
+    //
+
+
+
   // replace this line with something appropriate
   return NULL;
 }
@@ -206,6 +266,7 @@ node* remove_from_list(node* list, char* destination_city)
 node* retrieve_nth(node* list, int ordinality)
 {
   // Insert your code here
+    node* temp;
 
   // replace this line with something appropriate
   return NULL;
