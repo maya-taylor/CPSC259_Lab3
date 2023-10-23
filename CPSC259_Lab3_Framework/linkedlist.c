@@ -3,7 +3,7 @@
  Purpose:      Implements the linked list functions whose prototypes
                are declared in the linked_list.h header file
  Author:       Maya Taylor Quinn Senych
- Student #s:   18489633 and 12345678
+ Student #s:   18489633 and 45034352
  CWLs:         mtaylo11 and qsenych
  Date:         October 23, 2023
  */
@@ -70,6 +70,7 @@ node* create_node(airplane plane)
 node* prepend_node(node* list, node* new_node)
 {
     new_node->next = list;
+    list = new_node;
     return(new_node);
 }
 
@@ -86,9 +87,7 @@ node* prepend_node(node* list, node* new_node)
  */
 node* delete_node(node* list)
 {
-  // Insert your code here
 
-  // replace this line with something appropriate
   return NULL;
 }
 
@@ -117,9 +116,7 @@ int get_length(node* list)
  */
 node* delete_list(node* list)
 {
-  // Insert your code here
-
-  // replace this line with something appropriate
+    //
   return list;
 }
 

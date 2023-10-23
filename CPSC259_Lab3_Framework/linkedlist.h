@@ -1,10 +1,10 @@
 /*
  File:         linkedlist.h
  Purpose:      Prototypes for a linked list implementation
- Author:       Your names
- Student #s:   12345678 and 12345678
- CWLs:         cwl1 and cwl2
- Date:         Add the date here
+ Author:       Maya Taylor Quinn Senych
+ Student #s:   18489633 and 45034352
+ CWLs:         mtaylo11 and qsenych
+ Date:         October 23, 2023
  */
 
 #pragma once
