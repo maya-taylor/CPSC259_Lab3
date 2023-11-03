@@ -215,15 +215,14 @@ void print_list(node* list_to_print)
 node* reverse(node* list)
 {
   // Insert your code here
+    node* newHead= NULL;
 
-    // temp 
+    while (list != NULL) {
+        prepend_node(newHead, list);
+        list = list->next;
+    }
 
-
-
-
-
-  // replace this line with something appropriate
-  return NULL;
+  return newHead;
 }
 
 /*
