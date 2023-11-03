@@ -218,10 +218,10 @@ node* reverse(node* list)
     node* newHead= NULL;
 
     while (list != NULL) {
-        prepend_node(newHead, list);
-        list = list->next;
+        node* nextNode = list->next;
+        newHead = prepend_node(newHead, list);
+        list = nextNode;
     }
-
   return newHead;
 }
 
@@ -239,16 +239,28 @@ node* reverse(node* list)
  */
 node* remove_from_list(node* list, char* destination_city)
 {
-  // Insert your code here
+    node* current = list;
+    node* prev = NULL;
 
+    while (current != NULL) {
+        if (strcmp(current->plane.city_destination, destination_city) == 0) {
+            node* toRemove = current;
+            current = current->next;
+            free(toRemove);
 
+            if (prev == NULL) 
+                list = current;
 
-    //
+            else 
+                prev->next = current;
+        }
+        else {
+            prev = current;
+            current = current->next;
+        }
+    }
 
-
-
-  // replace this line with something appropriate
-  return NULL;
+    return list;
 }
 
 /*
@@ -264,11 +276,27 @@ node* remove_from_list(node* list, char* destination_city)
  */
 node* retrieve_nth(node* list, int ordinality)
 {
-  // Insert your code here
-    node* temp;
+    int length = get_length(list);
+    int count = 1;
+    node* temp = list;
+    
 
-  // replace this line with something appropriate
-  return NULL;
+    if (ordinality <= length) {
+        while(temp != NULL) {
+            if (count == ordinality) {
+                return temp;
+            }
+            else {
+                count++;
+                if(temp->next != NULL)
+                    temp = temp->next;
+            }
+        }
+    }
+    else {
+        return NULL;
+    }
+  
 }
 
 /*
@@ -291,8 +319,35 @@ node* retrieve_nth(node* list, int ordinality)
  */
 node* insert_nth(node* list, node* node_to_insert, int ordinality)
 {
-  // Insert your code here
+    int count = 1;
+    int length = get_length(list);
+    node* current = list;
 
-  // replace this line with something appropriate
-  return NULL;
+    if (list == NULL && ordinality <= length+1) {
+        list = node_to_insert;
+        return list;
+    }
+
+    if (ordinality == 1) {
+        list = prepend_node(list, node_to_insert);
+        return list;
+    }
+
+    if ((ordinality <= length + 1) && (list != NULL)) {
+        while (current != NULL) {
+            if (count == ordinality) {
+                node* temp = current->next;
+                current->next = node_to_insert;
+                current->next->next = temp;
+                return list;
+            }
+            else {
+                count++;
+                current = current->next;
+            }
+        }
+    }
+  
+    return list;
+
 }
