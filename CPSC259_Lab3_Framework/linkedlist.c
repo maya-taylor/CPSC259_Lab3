@@ -50,8 +50,15 @@ node* create_linked_list()
 node* create_node(airplane plane)
 {
     node* name = (node*)malloc(sizeof(node));
-    name->plane = plane;
     name->next = NULL;
+    name->plane.flight_number = plane.flight_number;
+    name->plane.city_destination = strdup(plane.city_destination);
+    name->plane.city_origin = strdup(plane.city_origin);
+    name->plane.priority = plane.priority;
+    name->plane.maximum_speed_kph = plane.maximum_speed_kph;
+    name->plane.cruising_altitude = plane.cruising_altitude;
+    name->plane.capacity = plane.capacity;
+
 
   return name;
 }
@@ -91,6 +98,9 @@ node* delete_node(node* list)
         node* temp;
         temp = list->next;
         list = temp;
+        free(temp->plane.city_destination);
+        free(temp->plane.city_origin);
+        free(temp);
         return list;
     }
     else {
@@ -246,6 +256,8 @@ node* remove_from_list(node* list, char* destination_city)
         if (strcmp(current->plane.city_destination, destination_city) == 0) {
             node* toRemove = current;
             current = current->next;
+            free(toRemove->plane.city_destination);
+            free(toRemove->plane.city_origin);
             free(toRemove);
 
             if (prev == NULL) 
@@ -319,23 +331,34 @@ node* retrieve_nth(node* list, int ordinality)
  */
 node* insert_nth(node* list, node* node_to_insert, int ordinality)
 {
-    int count = 1;
+    int count = 0;
     int length = get_length(list);
     node* current = list;
 
-    if (list == NULL && ordinality <= length+1) {
-        list = node_to_insert;
+    if (ordinality > length + 1) {
         return list;
     }
+
+   
 
     if (ordinality == 1) {
-        list = prepend_node(list, node_to_insert);
+        if (list == NULL) {
+            list = node_to_insert;
+            node_to_insert->next = NULL;
+        }
+        else {
+            list = prepend_node(list, node_to_insert);
+        }
         return list;
     }
 
-    if ((ordinality <= length + 1) && (list != NULL)) {
-        while (current != NULL) {
-            if (count == ordinality) {
+    if (list == NULL) {
+        return NULL;
+    }
+
+    if ((ordinality < length + 1) && (list != NULL)) {
+        while (current->next != NULL) {
+            if (count == ordinality - 2) {
                 node* temp = current->next;
                 current->next = node_to_insert;
                 current->next->next = temp;
@@ -347,7 +370,18 @@ node* insert_nth(node* list, node* node_to_insert, int ordinality)
             }
         }
     }
-  
-    return list;
+
+    if (ordinality == length + 1)
+    {
+        if (current != NULL) {
+            while (current->next != NULL)
+            {
+                current = current->next;
+            }
+            current->next = node_to_insert;
+            current->next->next = NULL;
+        }
+        return list;
+    }
 
 }
